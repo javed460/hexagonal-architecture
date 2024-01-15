@@ -26,4 +26,12 @@ public class PersonController {
         Person person = personService.getPerson(id);
         return transformFromPerson(person);
     }
+
+    @PutMapping("{id}")
+    public PersonDTO updatePerson(@PathVariable("id") String id, @RequestBody PersonDTO personDTO) {
+        Person person = transformFromPersonDTO(personDTO);
+        person.setId(Long.parseLong(id));
+        Person updatedPerson = personService.updatePerson(person);
+        return transformFromPerson(updatedPerson);
+    }
 }
